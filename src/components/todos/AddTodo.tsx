@@ -91,7 +91,6 @@ export default function AddTodo({
           value={formData.name}
         />
         <TextareaComponent
-          label="Task Description"
           placeholder="Task Description (OPTIONAL)"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, description: e.target.value })
@@ -102,6 +101,7 @@ export default function AddTodo({
         <InputComponent
           placeholder="Start Date"
           type="date"
+          label="Start Date"
           onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
             setFormData({ ...formData, start_date: e.target.value })
           }

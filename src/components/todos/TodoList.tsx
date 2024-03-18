@@ -1,6 +1,7 @@
 import { Flex, Image } from "@chakra-ui/react";
 import TodoItem from "./TodoItem";
 import { ITodo } from "../../interface";
+import Empty from "../reusables/Empty";
 
 export default function TodoList({
   list,
@@ -30,9 +31,15 @@ export default function TodoList({
           overflow="scroll"
           padding="1rem"
         >
-          {list?.map((el: ITodo, i: number) => (
-            <TodoItem setData={setData} item={el} key={i} />
-          ))}
+          {list?.length === 0 ? (
+            <Empty />
+          ) : (
+            <>
+              {list?.map((el: ITodo, i: number) => (
+                <TodoItem setData={setData} item={el} key={i} />
+              ))}
+            </>
+          )}
         </Flex>
       </Flex>
     </Flex>
