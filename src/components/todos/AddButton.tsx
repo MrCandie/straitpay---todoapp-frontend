@@ -1,12 +1,17 @@
 import { Flex, useDisclosure } from "@chakra-ui/react";
 import { FaPlus } from "react-icons/fa6";
 import AddTodo from "./AddTodo";
+import { ITodo } from "../../interface";
 
-export default function AddButton() {
+export default function AddButton({
+  setData,
+}: {
+  setData: (e: Array<ITodo>) => void;
+}) {
   const { isOpen, onClose, onOpen } = useDisclosure();
   return (
     <>
-      <AddTodo isOpen={isOpen} onClose={onClose} />
+      <AddTodo setData={setData} isOpen={isOpen} onClose={onClose} />
       <Flex
         position="fixed"
         bottom="10"
@@ -16,7 +21,7 @@ export default function AddButton() {
         justify="center"
       >
         <Flex
-          padding="2rem"
+          padding="1.5rem"
           borderRadius="100%"
           align="center"
           justify="center"

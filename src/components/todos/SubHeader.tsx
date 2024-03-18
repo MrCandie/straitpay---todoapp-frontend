@@ -2,8 +2,23 @@ import { Tabs, TabList, TabPanels, Tab, TabPanel } from "@chakra-ui/react";
 import { MdChecklistRtl } from "react-icons/md";
 import { FaListUl } from "react-icons/fa";
 import TodoList from "./TodoList";
+import { ITodo } from "../../interface";
+import { useEffect, useState } from "react";
 
-export default function SubHeader() {
+export default function SubHeader({
+  data,
+  setData,
+}: {
+  data: Array<ITodo>;
+  setData: (e: Array<ITodo>) => void;
+}) {
+  const [list, setList] = useState<Array<ITodo>>([]);
+
+  useEffect(() => {
+    const completed = data?.filter((el) => el.status === "completed");
+    setList(completed);
+  }, [data]);
+
   return (
     <Tabs width="100%">
       <TabList>
@@ -16,7 +31,7 @@ export default function SubHeader() {
           width="50%"
         >
           <FaListUl />
-          All
+          All ({data ? data?.length?.toLocaleString() : 0})
         </Tab>
         <Tab
           width="50%"
@@ -27,17 +42,17 @@ export default function SubHeader() {
           gap="8px"
         >
           <MdChecklistRtl />
-          Completed
+          Completed ({list ? list?.length?.toLocaleString() : 0})
         </Tab>
       </TabList>
 
       <TabPanels>
         <TabPanel padding="0rem" marginTop="1rem">
-          <TodoList />
+          <TodoList setData={setData} list={data} />
         </TabPanel>
 
-        <TabPanel>
-          <p>three!</p>
+        <TabPanel padding="0rem" marginTop="1rem">
+          <TodoList list={list} setData={setData} />
         </TabPanel>
       </TabPanels>
     </Tabs>

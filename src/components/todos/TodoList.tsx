@@ -1,12 +1,23 @@
 import { Flex, Image } from "@chakra-ui/react";
 import TodoItem from "./TodoItem";
+import { ITodo } from "../../interface";
 
-export default function TodoList() {
-  const data = [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1];
+export default function TodoList({
+  list,
+  setData,
+}: {
+  list: Array<ITodo>;
+  setData: (e: Array<ITodo>) => void;
+}) {
   return (
     <Flex width="100%" align="center" height="100%">
       <Flex w="100%" height="100%" position="relative">
-        <Image width="100%" src="/bg.png" height="100%" fit="cover" />
+        <Image
+          width="100%"
+          src="/bg.png"
+          height={{ lg: "85vh", md: "85vh", base: "88vh" }}
+          fit="cover"
+        />
         <Flex
           height="100%"
           position="absolute"
@@ -19,8 +30,8 @@ export default function TodoList() {
           overflow="scroll"
           padding="1rem"
         >
-          {data?.map((_, i) => (
-            <TodoItem key={i} />
+          {list?.map((el: ITodo, i: number) => (
+            <TodoItem setData={setData} item={el} key={i} />
           ))}
         </Flex>
       </Flex>
